@@ -6,6 +6,8 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 
 import java.util.concurrent.TimeUnit;
@@ -24,32 +26,41 @@ public class DemoApplication {
          */
 
 
-        SpringApplication.run(DemoApplication.class, args);
+        ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
+//        // 步骤一
+//        log.info("scheduler.start");
+//        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+//        scheduler.start();
+//
+//        log.info("instanceName = " + scheduler.getSchedulerName());
+//
+//        // 步骤二
+//        JobDetail jobDetail = JobBuilder.newJob(HelloJob.class)
+//                .withIdentity("jbo1", "group1").build();
+//
+//        // 步骤三
+//        SimpleScheduleBuilder simpleScheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5)
+//                .repeatForever();
+//        Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1").startNow()
+//                .withSchedule(simpleScheduleBuilder).build();
+//
+//        scheduler.scheduleJob(jobDetail, trigger);
+//
+//        TimeUnit.SECONDS.sleep(20);
+//
+//        scheduler.shutdown();
+//
+//        log.info(" scheduler.shutdown");
 
-        // 步骤一
-        log.info("scheduler.start");
-        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
-        scheduler.start();
-
-        log.info("instanceName = " + scheduler.getSchedulerName());
-
-        // 步骤二
-        JobDetail jobDetail = JobBuilder.newJob(HelloJob.class)
-                .withIdentity("jbo1", "group1").build();
-
-        // 步骤三
-        SimpleScheduleBuilder simpleScheduleBuilder = SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(5)
-                .repeatForever();
-        Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "group1").startNow()
-                .withSchedule(simpleScheduleBuilder).build();
-
-        scheduler.scheduleJob(jobDetail, trigger);
-
-        TimeUnit.SECONDS.sleep(20);
-
-        scheduler.shutdown();
-
-        log.info(" scheduler.shutdown");
-
+        Scheduler scheduler = ctx.getBean(Scheduler.class);
+        try {
+            Thread.sleep(40000);
+            scheduler.deleteJob(new JobKey("MyTask_job", "MyTask_group"));
+            System.out.println("App.main().deleteJob");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
     }
 }
