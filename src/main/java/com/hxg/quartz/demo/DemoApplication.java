@@ -52,15 +52,17 @@ public class DemoApplication {
 //
 //        log.info(" scheduler.shutdown");
 
-        Scheduler scheduler = ctx.getBean(Scheduler.class);
-        try {
-            Thread.sleep(40000);
-            scheduler.deleteJob(new JobKey("MyTask_job", "MyTask_group"));
-            System.out.println("App.main().deleteJob");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
+
+        // spring 托管
+//        Scheduler scheduler = ctx.getBean(Scheduler.class);
+//        try {
+//            Thread.sleep(40000);
+//            scheduler.deleteJob(new JobKey("MyTask_job", "MyTask_group"));
+//            System.out.println("App.main().deleteJob");
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        } catch (SchedulerException e) {
+//            e.printStackTrace();
+//        }
     }
 }

@@ -32,7 +32,7 @@ public class MyQuartzTask extends BaseTask {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        System.out.println("MyTask.execute().date=" + new Date());
+//        System.out.println("MyTask.execute().date=" + new Date());
         helloService.hello();
     }
 

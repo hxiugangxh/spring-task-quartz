@@ -1,0 +1,15 @@
+spring:
+  application:
+      name: task
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/clustertask?useSSL=false&allowMultiQueries=true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
