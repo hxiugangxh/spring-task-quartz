@@ -44,6 +44,12 @@
         </dependency>
 
         <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>net.javacrumbs.shedlock</groupId>
             <artifactId>shedlock-provider-jdbc-template</artifactId>
             <version>1.0.0</version>
